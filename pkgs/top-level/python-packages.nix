@@ -13497,6 +13497,8 @@ self: super: with self; {
 
   steam = callPackage ../development/python-modules/steam { };
 
+  steamctl = callPackage ../development/python-modules/steamctl { };
+
   steamodd = callPackage ../development/python-modules/steamodd { };
 
   steamship = callPackage ../development/python-modules/steamship { };
