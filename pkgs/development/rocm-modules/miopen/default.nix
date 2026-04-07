@@ -38,6 +38,7 @@
   buildDocs ? false, # Needs internet because of rocm-docs-core
   buildTests ? false,
   withComposableKernel ? true,
+  symlinkJoin,
 }:
 
 let
@@ -81,6 +82,15 @@ let
       ]
     )
   );
+
+  # for hiprtcCompileProgram
+  hiprtcCompileRocmPath = symlinkJoin {
+    name = "hiprtc-compile-rocm-path";
+    paths = [
+      clr
+      rocrand
+    ];
+  };
 
   # Kernel databases moved from Git LFS to DVC (anonymous s3 bucket s3://therock-dvc/rocm-libraries)
   fetchKdb =
@@ -244,7 +254,7 @@ stdenv.mkDerivation (finalAttrs: {
     patchShebangs test src/composable_kernel fin utils install_deps.cmake
 
     substituteInPlace src/comgr.cpp \
-      --replace-fail '"/opt/rocm"' '"${clr}"'
+      --replace-fail '"/opt/rocm"' '"${hiprtcCompileRocmPath}"'
   ''
   + linkKDBsTo "src/kernels"
   + ''
