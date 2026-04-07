@@ -203,7 +203,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-DAMDGPU_TARGETS=${lib.concatStringsSep ";" supportedTargets}"
     "-DGPU_TARGETS=${lib.concatStringsSep ";" supportedTargets}"
     "-DGPU_ARCHS=${lib.concatStringsSep ";" supportedTargets}"
-    "-DMIOPEN_USE_SQLITE_PERFDB=ON"
+    "-DMIOPEN_USE_SQLITE_PERFDB=OFF"
     "-DCMAKE_VERBOSE_MAKEFILE=ON"
     "-DCMAKE_MODULE_PATH=${clr}/hip/cmake"
     "-DCMAKE_BUILD_TYPE=Release"
